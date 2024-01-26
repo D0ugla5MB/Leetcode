@@ -1,7 +1,70 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.event.ListDataEvent;
+
 public class ProblemSolutions implements ProblemList {
+
+    @Override
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+
+        /*
+         * int[] tempSortedArr = new int[candies.length];
+         * for (int i = 0; i < tempSortedArr.length; i++) {
+         * tempSortedArr[i] = candies[i];
+         * }
+         * 
+         * for (int i = 0; i < tempSortedArr.length - 1; i++) {
+         * int lowestNum = tempSortedArr[i];
+         * for (int j = i + 1; j < tempSortedArr.length; j++) {
+         * int largerNum = tempSortedArr[j];
+         * if (lowestNum > tempSortedArr[j]) {
+         * lowestNum = lowestNum ^ largerNum;
+         * largerNum = lowestNum ^ largerNum;
+         * lowestNum = lowestNum ^ largerNum;
+         * 
+         * tempSortedArr[i] = lowestNum;
+         * tempSortedArr[i + 1] = largerNum;
+         * break;
+         * }
+         * }
+         * }
+         * 
+         * int largerNum = tempSortedArr[tempSortedArr.length - 1];
+         * 
+         * 
+         * for (int i = 1; i < tempSortedArr.length; i++) {
+         * if (tempSortedArr[i] + extraCandies > largerNum) {
+         * kidsCandieList.add(true);
+         * } else {
+         * kidsCandieList.add(false);
+         * }
+         * }
+         */
+
+        List<Boolean> kidsCandieList = new ArrayList<>();
+        int kidsListSize = candies.length;
+        int manyCandy = candies[0];
+        for (int i = 1; i < kidsListSize; i++) {
+            int fewCandy = candies[i];
+            if (fewCandy > manyCandy) {
+                manyCandy = fewCandy;
+            }
+        }
+
+        for (int i = 0; i < candies.length; i++) {
+            int numCandy = candies[i] + extraCandies;
+            if (numCandy >= manyCandy) {
+                kidsCandieList.add(true);
+            } else {
+                kidsCandieList.add(false);
+
+            }
+        }
+
+        return kidsCandieList;
+    }
 
     @Override
     public String mergeAlternately(String word1, String word2) {
@@ -44,9 +107,8 @@ public class ProblemSolutions implements ProblemList {
     }
 
     @Override
-    public  String gcdOfStrings(String str1, String str2) {
-       
-        
+    public String gcdOfStrings(String str1, String str2) {
+
         if (!str1.startsWith(str2) && !str2.startsWith(str1)) {
             return "";
         }
@@ -55,7 +117,6 @@ public class ProblemSolutions implements ProblemList {
 
         return str1.substring(0, gcdLength);
     }
-
 
     public String gcdOfStringsV2(String word1, String word2) {
         List<Integer> ranges = new ArrayList<>();
@@ -89,6 +150,5 @@ public class ProblemSolutions implements ProblemList {
         return newString.toString();
 
     }
-
 
 }
